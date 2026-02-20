@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContaBeto — Tu Contador Digital por WhatsApp</title>
+    <meta name="description" content="Manda tu ticket por WhatsApp. Nosotros lo registramos, facturamos y te damos tu reporte para el SAT. Desde $299/mes.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ContaBeto — Tu Contador Digital por WhatsApp">
+    <meta property="og:description" content="Manda tu ticket por WhatsApp. Nosotros lo registramos, facturamos y te damos tu reporte para el SAT.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://contabeto.zxy.vc">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧾</text></svg>">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --dark: #1a1a2e;
+            --gray: #6b7280;
+            --light: #f9fafb;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header */
+        header {
+            padding: 20px 0;
+            background: var(--white);
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--white) 0%, var(--light) 100%);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: #dcfce7;
+            color: var(--primary-dark);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--dark);
+        }
+        
+        .hero h1 .highlight {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--primary);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+        
+        .cta-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        /* Meet Beto */
+        .meet-beto {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .beto-intro {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .beto-image img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border: 4px solid var(--primary);
+        }
+        
+        .beto-text h2 {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+        
+        .beto-text .highlight {
+            color: var(--primary);
+        }
+        
+        .beto-tagline {
+            font-size: 20px;
+            color: var(--primary-dark);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .beto-text > p:last-of-type {
+            color: var(--gray);
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+        
+        .beto-stats {
+            display: flex;
+            gap: 32px;
+        }
+        
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .stat-number {
+            font-size: 28px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        @media (max-width: 768px) {
+            .beto-intro {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .beto-image img {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto;
+            }
+            
+            .beto-stats {
+                justify-content: center;
+            }
+            
+            .beto-text h2 {
+                font-size: 32px;
+            }
+        }
+        
+        /* How it works */
+        .how-it-works {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 60px;
+        }
+        
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        
+        .step {
+            text-align: center;
+            padding: 32px;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0 auto 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        
+        .step p {
+            color: var(--gray);
+        }
+        
+        /* Benefits */
+        .benefits {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .benefit-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        
+        .benefit-card .icon {
+            font-size: 40px;
+            margin-bottom: 16px;
+        }
+        
+        .benefit-card h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-card p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+        
+        /* Pricing */
+        .pricing {
+            padding: 80px 0;
+            background: var(--white);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: var(--white);
+            border: 2px solid #eee;
+            border-radius: 16px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--primary);
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.15);
+        }
+        
+        .pricing-card .plan-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-card .price {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .pricing-card .price span {
+            font-size: 18px;
+            color: var(--gray);
+            font-weight: 400;
+        }
+        
+        .pricing-card .description {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 32px;
+        }
+        
+        .pricing-card li {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .pricing-card li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .pricing-button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        
+        .pricing-button.primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .pricing-button.secondary {
+            background: var(--light);
+            color: var(--dark);
+        }
+        
+        /* FAQ */
+        .faq {
+            padding: 80px 0;
+            background: var(--light);
+        }
+        
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .faq-item h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+        
+        .faq-item p {
+            color: var(--gray);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: var(--dark);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            color: var(--white);
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        
+        .cta-section p {
+            color: #9ca3af;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background: var(--dark);
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 14px;
+        }
+        
+        footer a {
+            color: #9ca3af;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            color: var(--white);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 60px 0 40px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="/" class="logo">Conta<span>Beto</span></a>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">🚀 Primeros 10 clientes: Prueba gratis por 1 mes</div>
+            <h1>Tu contador digital<br>por <span class="highlight">WhatsApp</span></h1>
+            <p>Manda tu ticket por WhatsApp. Nosotros lo registramos, facturamos y te damos tu reporte para el SAT.</p>
+            <a href="https://tally.so/r/0QxobA" class="cta-button">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                Registrarme ahora
+            </a>
+        </div>
+    </section>
+    
+    <section class="meet-beto">
+        <div class="container">
+            <div class="beto-intro">
+                <div class="beto-image">
+                    <img src="beto-web.png" alt="Beto - Tu contador digital">
+                </div>
+                <div class="beto-text">
+                    <h2>Hola, soy <span class="highlight">Beto</span> 👋</h2>
+                    <p class="beto-tagline">Tu contador digital que trabaja 24/7</p>
+                    <p>Soy un agente de inteligencia artificial especializado en contabilidad para freelancers y pequeños negocios en México. No descanso, no me enfermo, y nunca olvido un ticket.</p>
+                    <div class="beto-stats">
+                        <div class="stat">
+                            <span class="stat-number">⚡</span>
+                            <span class="stat-label">Respondo en segundos</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">🌙</span>
+                            <span class="stat-label">Disponible 24/7</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">🇲🇽</span>
+                            <span class="stat-label">Hecho para México</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Manda tu ticket</h3>
+                    <p>Toma foto a tu ticket de compra y mándamelo por WhatsApp. Acepto cualquier formato.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Yo lo proceso</h3>
+                    <p>Registro tu gasto, lo categorizo y genero la factura automáticamente si aplica.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Recibe tu reporte</h3>
+                    <p>Cada mes te envío un resumen de tus gastos listo para el SAT. Sin complicaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">¿Por qué ContaBeto?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="icon">⚡</div>
+                    <h3>Facturación en minutos</h3>
+                    <p>No más portales complicados. Mándame el ticket y yo me encargo de facturarlo.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">📱</div>
+                    <h3>Todo por WhatsApp</h3>
+                    <p>Sin apps que instalar, sin plataformas que aprender. Solo mándame mensaje.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🧾</div>
+                    <h3>Nunca pierdas un ticket</h3>
+                    <p>Todos tus gastos guardados y organizados en la nube. Acceso cuando quieras.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">📊</div>
+                    <h3>Reportes mensuales</h3>
+                    <p>Resumen de gastos categorizados listo para tu contador o para el SAT.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🔒</div>
+                    <h3>Seguro y privado</h3>
+                    <p>Tu información está encriptada y protegida. Solo tú tienes acceso.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="icon">🤖</div>
+                    <h3>Disponible 24/7</h3>
+                    <p>Mándame tickets a cualquier hora. Respondo en segundos, no en días.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Planes simples y transparentes</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Básico</div>
+                    <div class="price">$299<span>/mes</span></div>
+                    <div class="description">Para freelancers y profesionistas</div>
+                    <ul>
+                        <li>Hasta 30 tickets/mes</li>
+                        <li>1 RFC para facturar</li>
+                        <li>Facturación automática</li>
+                        <li>Reporte mensual</li>
+                        <li>Soporte por WhatsApp</li>
+                    </ul>
+                    <a href="https://tally.so/r/0QxobA" class="pricing-button secondary">Empezar</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="plan-name">Pro ⭐</div>
+                    <div class="price">$599<span>/mes</span></div>
+                    <div class="description">Para pequeños negocios</div>
+                    <ul>
+                        <li>Hasta 100 tickets/mes</li>
+                        <li>2 RFCs para facturar</li>
+                        <li>Facturación automática</li>
+                        <li>Reporte semanal y mensual</li>
+                        <li>Categorías personalizadas</li>
+                        <li>Soporte prioritario</li>
+                    </ul>
+                    <a href="https://tally.so/r/0QxobA" class="pricing-button primary">Empezar</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="plan-name">Empresa</div>
+                    <div class="price">$999<span>/mes</span></div>
+                    <div class="description">Para PyMEs y equipos</div>
+                    <ul>
+                        <li>Tickets ilimitados</li>
+                        <li>RFCs ilimitados</li>
+                        <li>Multi-usuario</li>
+                        <li>Reportes personalizados</li>
+                        <li>Integración contable</li>
+                        <li>Soporte dedicado</li>
+                    </ul>
+                    <a href="https://tally.so/r/0QxobA" class="pricing-button secondary">Contactar</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Preguntas frecuentes</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <h3>¿Qué tipo de tickets puedo mandar?</h3>
+                    <p>Cualquier ticket de compra: supermercado, restaurantes, gasolina, compras en línea, servicios, etc. Acepto fotos, PDFs y hasta tickets electrónicos reenviados.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Cómo funciona la facturación automática?</h3>
+                    <p>Me compartes tus datos fiscales una vez. Cuando me mandes un ticket que pueda facturarse, yo entro al portal del comercio y genero tu factura automáticamente.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Mis datos están seguros?</h3>
+                    <p>Absolutamente. Uso encriptación de grado bancario y nunca comparto tu información con terceros. Solo tú tienes acceso a tus registros.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿Puedo cancelar en cualquier momento?</h3>
+                    <p>Sí, sin preguntas ni penalizaciones. Tus datos te pertenecen y puedes exportarlos cuando quieras.</p>
+                </div>
+                <div class="faq-item">
+                    <h3>¿ContaBeto reemplaza a mi contador?</h3>
+                    <p>No, soy un complemento. Me encargo del registro diario y facturación para que tú (o tu contador) tengan todo organizado al momento de declarar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para olvidarte de los tickets perdidos?</h2>
+            <p>Únete a los primeros usuarios y prueba ContaBeto gratis por un mes.</p>
+            <a href="https://tally.so/r/0QxobA" class="cta-button">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:24px;height:24px"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                Registrarme ahora
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>ContaBeto es un producto de <a href="https://zxy.vc" target="_blank">ZXY Ventures</a></p>
+            <p style="margin-top: 8px;">León, Guanajuato, México 🇲🇽</p>
+        </div>
+    </footer>
+</body>
+</html>
